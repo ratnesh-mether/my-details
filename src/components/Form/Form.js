@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import './Form.css'
 
 const Form = () => {
+    const [userData, setUserData] = useState([]);
     const [errorFlag, setErrorFlag] = useState(false);
+    const [editFlag, setEditFlag] = useState(-1);
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -60,18 +62,62 @@ const Form = () => {
         return errorFlag;
     }
     const onSubmitHandler = (event) => {
+        const reset = {
+            name: '',
+            email: '',
+            education: '',
+            languages: [],
+            gender: ''
+        }
         event.preventDefault();
         setErrorFlag(true)
         if (!checkEmptyValue()) {
-            console.log(formData);
+            const temp = [...userData];
+            if (editFlag === -1) {
+                temp.push(formData);
+                alert("Record Added Successfully")
+
+            }
+            else {
+                temp[editFlag] = formData;
+                setEditFlag(-1)
+                alert("Record Updated Successfully")
+            }
+            setUserData(temp);
+            setFormData(reset);
+            setErrorFlag(false);
+
         }
         else {
             console.warn("Error")
         }
     }
-    // useEffect(() => {
-    //     console.log(formData)
-    // }, [formData])
+    const showDetails = () => {
+        return userData.map((item, index) =>
+            <div className='card' key={item.email}>
+                <p>Name :{item.name}</p>
+                <p>Email :{item.email}</p>
+                <p>Education :{item.education}</p>
+                <p>Gender :{item.gender}</p>
+                <p>Skills :  {item.languages.map((lang, index) => <span key={index}>{lang}{index < item.languages.length - 1 ? ',' : ''}</span>)}</p>
+                <button className='edit' onClick={() => editUser(item, index)}>Edit</button>
+                <button className='delete' onClick={() => deleteUser(index)}>Delete</button>
+            </div>
+        )
+    }
+    const deleteUser = (index) => {
+        let tempUser = [...userData];
+        tempUser.splice(index, 1);
+        setUserData(tempUser)
+        alert("Record Deleted Successfully")
+    }
+    const editUser = (user, index) => {
+        setEditFlag(index)
+        setFormData(user);
+    }
+    useEffect(() => {
+        console.log(userData)
+    }, [userData])
     return <div className='form-container'>
         <form action="submit">
             <div className="form-group">
@@ -106,6 +152,9 @@ const Form = () => {
             </div>
             <button onClick={onSubmitHandler}>Submit</button>
         </form>
+        <div className="show-details-container">
+            {showDetails()}
+        </div>
     </div>
 }
 

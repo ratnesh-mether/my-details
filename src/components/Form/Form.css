@@ -1,8 +1,15 @@
+.form-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 72px;
+}
 form {
     display: flex;
     flex-direction: column;
     border-right: 1px solid #aaa;
     padding-right: 40px;
+    margin-right: 40px;
     max-width: 300px;
     row-gap: 24px;
     font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
@@ -34,4 +41,30 @@ button {
     border-radius: 4px;
     cursor: pointer;
     margin: auto;
+}
+.show-details-container {
+    max-height: 700px;
+    overflow: scroll;
+    display: flex;
+    flex-direction: column;
+    row-gap: 24px;
+}
+.card {
+    border: 2px solid #aaa;
+    background-color: rgb(247, 247, 195);
+    border-radius: 4px;
+    padding: 0 16px 16px;
+    text-transform: capitalize;
+    width: max-content;
+    height: max-content;
+    text-align: center;
+}
+
+.card > .delete {
+    background: red;
+}
+.card > .edit {
+    margin-right: 8px;
+
+    background: orange;
 }
