@@ -17,10 +17,10 @@ form {
     font-size: 20px;
     font-weight: 500;
 }
-input[type="text"] {
+.form-container > input[type="text"] {
     height: 40px;
 }
-select {
+.form-container > select {
     height: 40px;
 }
 .form-group {
@@ -32,7 +32,7 @@ select {
     color: red;
     margin: 0;
 }
-button {
+.form-container button {
     height: 40px;
     width: 200px;
     background-color: rgb(23, 199, 23);

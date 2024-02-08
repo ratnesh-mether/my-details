@@ -54,7 +54,7 @@ const Form = () => {
         for (const key in formData) {
             if (formData.hasOwnProperty(key)) {
                 const value = formData[key];
-                if (value === '' || Array.isArray(value) && value.length === 0) {
+                if (value === '' || (Array.isArray(value) && value.length === 0)) {
                     errorFlag = true;
                 }
             }
